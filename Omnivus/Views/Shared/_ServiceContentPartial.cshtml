@@ -1,0 +1,21 @@
+﻿@{
+   var UIUXDesign = new ServiceBoxModel {Title = "UI/UX Design", Description = "The functional goal of technical content is to help people use a product successfully. The business goal must tie the content."};
+   var ITConsultancy = new ServiceBoxModel {Title = "IT Consultancy", Description = "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC."};
+   var TechnologyProf = new ServiceBoxModel {Title = "Technology Prof.", Description = "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour."};
+   var WebDevelopment = new ServiceBoxModel {Title = "Web Development", Description = "In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best."};
+   var AppDevelopment = new ServiceBoxModel {Title = "App Development", Description = "Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain."};
+   var GameDesign = new ServiceBoxModel {Title = "Game Design", Description = "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam."};
+
+}
+
+
+<div id="serviceContent">
+    <div class="serviceGrid">
+        <partial name="_ServiceBoxPartial" model="@UIUXDesign"/>
+        <partial name="_ServiceBoxPartial" model="@ITConsultancy"/>
+        <partial name="_ServiceBoxPartial" model="@TechnologyProf"/>
+        <partial name="_ServiceBoxPartial" model="@WebDevelopment"/>
+        <partial name="_ServiceBoxPartial" model="@AppDevelopment"/>
+        <partial name="_ServiceBoxPartial" model="@GameDesign"/>
+    </div>
+</div>

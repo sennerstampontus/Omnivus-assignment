@@ -1,0 +1,14 @@
+@import './variables';
+@import './basics';
+@import './spacing';
+
+@import './sections/header';
+@import './sections/showcase';
+
+
+
+.background{
+    width: 100%;
+    height: 100vh;
+    background-image: radial-gradient(#e9ebeb 25% 5% ,#b6d4f8);
+}

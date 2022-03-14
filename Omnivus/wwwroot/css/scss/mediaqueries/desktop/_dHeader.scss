@@ -1,0 +1,95 @@
+@include desktop{
+    .header{
+        display: flex;
+        width: 100%;
+    }
+    .navbar-brand{
+        display: block;
+        position: relative;
+        top: -15px;
+        left: 0 ;
+        font-family: $primary-font-Karla;
+        color: #808080 !important;
+        font-size: 1rem;
+    }
+    
+    .social-nav{
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        a{
+            color: $seaBlue;
+            font-family: $primary-font-Karla;
+            text-decoration: none;
+        }
+        .socials{
+            a{
+                margin-right: .8rem;
+    
+                &:last-child{
+                    margin-right: 0;
+                }
+            }
+        }
+    }
+    
+    
+    
+    .bottomBorder{
+        border-bottom: 1px solid #99C2F6;
+    }
+    
+    .logo{
+        display: block;
+        margin-right: 3rem;
+        img{
+            position: relative;
+            top: -30px;
+            width: 100%;
+            height: auto;
+        }
+        
+    }
+    
+    .navbar{
+        a{
+            color: $skyBlue;
+            margin-right: 2.5rem;
+            text-decoration: none;
+            transform: scale(1);
+            transition: transform .2s, color .2s ease-in-out;
+    
+            &:hover{
+                color: $clearBlue;
+                font-weight: $medium;
+                transform: scale(1.1);
+            }
+        }
+    
+        
+    
+        &:last-child{
+            margin-right: 0;
+        }
+    
+        button{
+            display: block;
+            font-family: $primary-font-Karla;
+            font-weight: $medium;
+            font-size: 1rem;
+            padding: 17px 40px;
+    
+            background-color: $clearBlue;
+            color: white;
+            border: none;
+            transition: background-color .2s;
+    
+            &:hover{
+                cursor: pointer;
+                background: $deepBlue;
+            }
+        }
+    }
+
+
+}

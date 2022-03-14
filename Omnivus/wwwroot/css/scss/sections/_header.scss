@@ -1,0 +1,96 @@
+.header{
+    width: 100%;
+    justify-content: center;
+}
+.navbar-brand{
+    display: block;
+    position: relative;
+    top: -15px;
+    left: 0 ;
+    font-family: $primary-font-Karla;
+    color: #808080 !important;
+    font-size: 1rem;
+}
+
+.social-nav{
+    display: none;
+    width: 100%;
+    justify-content: space-between;
+    a{
+        color: $seaBlue;
+        font-family: $primary-font-Karla;
+        text-decoration: none;
+    }
+    .socials{
+        a{
+            margin-right: .8rem;
+
+            &:last-child{
+                margin-right: 0;
+            }
+        }
+    }
+}
+
+
+
+.bottomBorder{
+    border-bottom: none;
+}
+
+.logo{
+    display: flex;
+    justify-content: center;
+    margin-right: 0;
+    img{
+        position: relative;
+        top: 0;
+        left: 0;
+        width: 70%;
+        height: auto;
+    }
+    
+}
+
+.navbar{
+    a{
+        color: $skyBlue;
+        margin-right: 2.5rem;
+        text-decoration: none;
+        transform: scale(1);
+        transition: transform .2s, color .2s ease-in-out;
+
+        &:hover{
+            color: $clearBlue;
+            font-weight: $medium;
+            transform: scale(1.1);
+        }
+    }
+
+    
+
+    &:last-child{
+        margin-right: 0;
+    }
+
+    button{
+        display: none;
+        font-family: $primary-font-Karla;
+        font-weight: $medium;
+        font-size: 1rem;
+        padding: 17px 40px;
+
+        background-color: $clearBlue;
+        color: white;
+        border: none;
+        transition: background-color .2s;
+
+        &:hover{
+            cursor: pointer;
+            background: $deepBlue;
+        }
+    }
+}
+
+
+@import '../mediaqueries/desktop/dHeader';
