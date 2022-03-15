@@ -1,0 +1,35 @@
+﻿@model SignInForm
+
+@{
+    ViewData["Title"] = "Sign In";
+}
+
+<div id="SignIn">
+    <div id="bookingContainerBox">
+        <div class="bookingContainer">
+            <div class="bookingContainer container">
+                <h1>Sign In</h1>
+                <p>Not a member? <a asp-controller="auth" asp-action="SignUp">Sign Up</a></p>
+            </div>
+            <div class="inputContainer container">
+
+                <form asp-action="SignIn" id="SignInUp">
+                    <div id="emailField">
+                        <input asp-for="Email" type="email" placeholder="Enter your email" id="emailField">
+                        <span asp-validation-for="Email" class="error"></span>
+                    </div>
+                    <div id="passwordField">
+                        <input asp-for="Password" type="password" placeholder="Enter your password">
+                        <span asp-validation-for="Password" class="error"></span>
+                    </div>                    
+                    <div class="contentBtns">
+                        <button type="submit" class="learnBtn">Log In</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div id="homeBtn">
+            <a asp-controller="Home" asp-action="Index"><Button>V</Button></a>
+        </div>
+    </div>
+</div>

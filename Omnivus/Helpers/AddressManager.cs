@@ -22,7 +22,8 @@ namespace Omnivus.Helpers
         public async Task CreateUserAddressAsync(AppUser user, AppAddress address)
         {
             var userAddress = new AppUserAddress();
-            var _address = _context.Addresses.FirstOrDefaultAsync(x => x.StreetName == address.StreetName && x.PostalCode == address.PostalCode);
+
+            var _address =  await _context.Addresses.FirstOrDefaultAsync(x => x.StreetName == address.StreetName && x.PostalCode == address.PostalCode);
             if(_address == null)
             {
                 _context.Addresses.Add(address);

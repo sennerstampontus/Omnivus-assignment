@@ -13,7 +13,7 @@ namespace Omnivus.Models
 
 
         [Display(Name = "Epostadress")]
-        [Required(ErrorMessage = "Epostadress kan inte vara tomt")]
+        [Required(ErrorMessage = "Du måste ange en Epostadress")]
         [RegularExpression(@"^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$", ErrorMessage = "Du måste ange en giltig e-postadress")]
         public string Email { get; set; }
 

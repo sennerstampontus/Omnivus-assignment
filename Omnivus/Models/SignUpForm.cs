@@ -39,7 +39,7 @@ namespace Omnivus.Models
 
         [Display(Name = "Bekräfta Lösenord")]
         [DataType(DataType.Password)]
-        [Required(ErrorMessage = "Du måste ange bekräfta lösenordet")]
+        [Required(ErrorMessage = "Du måste bekräfta lösenordet")]
         [Compare("Password", ErrorMessage = "Lösenorden matchar inte")]
         public string ConfirmPassword { get; set; }
 

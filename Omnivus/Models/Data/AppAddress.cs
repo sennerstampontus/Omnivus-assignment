@@ -5,6 +5,19 @@ namespace Omnivus.Models.Data
 {
     public class AppAddress
     {
+
+        public AppAddress()
+        {
+
+        }
+
+        public AppAddress(string streetName, string postalCode, string city)
+        {
+            StreetName = streetName;
+            PostalCode = postalCode;
+            City = city;
+        }
+
         [Key]
         public int Id { get; set; }
         [Required]

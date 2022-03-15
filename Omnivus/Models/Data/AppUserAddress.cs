@@ -14,7 +14,7 @@ namespace Omnivus.Models.Data
       public string UserId { get; set; }
       public int AddressId { get; set; }
 
-        public virtual AppUser User { get; set; }
-        public virtual AppAddress Address { get; set; }
+      public virtual AppUser User { get; set; }
+      public virtual AppAddress Address { get; set; }
     }
 }

@@ -11,6 +11,7 @@ builder.Services.AddDbContext<AppDbContext>(x => x.UseSqlServer(builder.Configur
 builder.Services.AddScoped<IAddressManager, AddressManager>();
 
 
+
 builder.Services.AddIdentity<AppUser, IdentityRole>(x =>
 {
     x.User.RequireUniqueEmail = true;
@@ -50,7 +51,6 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthentication();
-
 app.UseAuthorization();
 
 app.MapControllerRoute(
