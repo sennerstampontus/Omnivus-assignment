@@ -17,7 +17,7 @@
                 <span>@Model.FirstName @Model.LastName</span>
             </div>
             <div class="profileRole">
-                <span>@User.FindFirst("UserRole").Value</span>
+                <span> @await ProfileManager.ReadRoleAsync(User.FindFirst("UserId").Value)</span>
             </div>
             <div class="profileStreetName">
                 <span>Street Name</span>
@@ -25,7 +25,7 @@
             </div>
             <div class="profilePostalCode">
                 <span>Postal Code</span>
-                <p class="mt-3">@Model.PostalCode</pclass>
+                <p class="mt-3">@Model.PostalCode</p>
             </div>
             <div class="profileCity">
                 <span>City</span>

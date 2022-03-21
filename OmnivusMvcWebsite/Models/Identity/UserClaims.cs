@@ -18,16 +18,7 @@ namespace OmnivusMvcWebsite.Models.Identity
         {
             
             var claimsIdentity = await base.GenerateClaimsAsync(user);
-
-            var roles = await base.UserManager.GetRolesAsync(user);
-            string role = "";
-            foreach (var _role in roles)
-            {
-                role = $"{_role} ";
-            }
-
             claimsIdentity.AddClaim(new Claim("UserId", user.Id));
-            claimsIdentity.AddClaim(new Claim("UserRole", role));
             
 
             return claimsIdentity;

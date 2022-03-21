@@ -10,6 +10,7 @@ namespace OmnivusMvcWebsite.Services
     {
         Task<ProfileResult> CreateAsync(IdentityUser user, UserProfile profile);
         Task<UserProfile> ReadAsync(string userId);
+        Task<string> ReadRoleAsync(string userId);
         Task<string> DisplayNameAsync(string userId);
     }
 
@@ -17,10 +18,12 @@ namespace OmnivusMvcWebsite.Services
     public class ProfileManager : IProfileManager
     {
         private readonly AppDbContext _context;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
-        public ProfileManager(AppDbContext context)
+        public ProfileManager(AppDbContext context, RoleManager<IdentityRole> roleManager)
         {
             _context = context;
+            _roleManager = roleManager;
         }
 
         public async Task<ProfileResult> CreateAsync(IdentityUser user, UserProfile profile)
@@ -70,6 +73,14 @@ namespace OmnivusMvcWebsite.Services
             return profile;
         }
 
+        public async Task<string> ReadRoleAsync(string userId)
+        {
+            var userRole = await _context.UserRoles.FirstOrDefaultAsync(x => x.UserId == userId);
+
+            var role = await _roleManager.FindByIdAsync(userRole.RoleId);
+
+            return role.Name;
+        }
     }
 
     public class ProfileResult
