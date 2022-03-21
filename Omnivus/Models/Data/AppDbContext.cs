@@ -16,20 +16,20 @@ namespace Omnivus.Models.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<AppUserAddress>()
                 .HasKey(x => new {x.UserId, x.AddressId});
-            
-            modelBuilder.Entity<IdentityUserLogin<string>>()
-                .HasKey("LoginProvider", "ProviderKey");
-            
-            modelBuilder.Entity<IdentityUserRole<string>>()
-                .HasKey("UserId", "RoleId");
-            
-            modelBuilder.Entity<IdentityUserToken<string>>()
-                .HasKey("UserId", "LoginProvider", "Name");
 
+            modelBuilder.Entity<AppUserProfile>()
+                .HasKey(x => new { x.UserId, x.ProfileId});
 
+            
+            modelBuilder.Entity<AppProfile>()
+                .HasOne(x => x.Address)
+                .WithMany()
+                .OnDelete(DeleteBehavior.Restrict);
         }
-
     }
 }

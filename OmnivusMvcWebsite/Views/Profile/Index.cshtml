@@ -1,0 +1,55 @@
+﻿@model UserProfile
+@{
+    ViewData["Title"] = $"Profile - {@Model.FirstName} {@Model.LastName}";
+}
+
+<div class="profileBackground">
+    <div id="homeBtn">
+        <button>V</button>
+    </div>
+    <div id="profile" class="container">
+        <div class="profileCard cardGrid">
+            <div class="profilePlaceholder container">
+                <img src="/img/profile_placeholder.svg"
+                     alt="placehodler.svg" />
+            </div>
+            <div class="profileName">
+                <span>@Model.FirstName @Model.LastName</span>
+            </div>
+            <div class="profileRole">
+                <span>@User.FindFirst("UserRole").Value</span>
+            </div>
+            <div class="profileStreetName">
+                <span>Street Name</span>
+                <p class="mt-3">@Model.StreetName</p>
+            </div>
+            <div class="profilePostalCode">
+                <span>Postal Code</span>
+                <p class="mt-3">@Model.PostalCode</pclass>
+            </div>
+            <div class="profileCity">
+                <span>City</span>
+                <p class="mt-3">@Model.City</p>
+            </div>
+            <div class="profileCountry">
+                <span>Country</span>
+                <p class="mt-3">@Model.Country</p>
+            </div>
+            <div class="profileEmail">
+                <span>Emailaddress</span>
+                <p class="mt-3">@Model.Email</p>
+            </div>
+        </div>
+        <div class="profileInfo">
+            <div class="cardGrid container">
+                <h1>About me</h1>
+                <div class="bio container">
+                    <textarea placeholder="Write about yourself"
+                              class="questionField"
+                              disabled>
+</textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

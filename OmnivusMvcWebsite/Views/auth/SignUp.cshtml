@@ -1,0 +1,68 @@
+﻿@model SignUpForm
+
+@{
+    ViewData["Title"] = "Sign Up";
+}
+<div id="SignUp">
+    <div id="bookingContainerBox">
+        <div class="bookingContainer">
+            <div class="bookingContainer container">
+                <h1>@ViewData["Title"]</h1>
+                <p>Register with a few steps or <a asp-controller="auth" asp-action="SignIn">Sign In</a></p>
+            </div>
+            <form asp-action="SignUp" class="inputContainer container">
+                <div id="firstnameField">
+                    <input asp-for="FirstName" type="text" placeholder="Enter your first name">
+                    <span asp-validation-for="FirstName" class="error"></span>
+                </div>
+                <div id="lastnameField">
+                    <input asp-for="LastName" type="text" placeholder="Enter your last name">
+                    <span asp-validation-for="LastName" class="error"></span>
+                </div>
+                <div id="emailField">
+                    <input asp-for="Email" type="email" placeholder="Enter your email" />
+                    <span asp-validation-for="Email" class="error"></span>
+                </div>
+                <div id="passwordField">
+                    <input asp-for="Password" type="password" placeholder="Enter your password" />
+                    <span asp-validation-for="Password" class="error"></span>
+                </div>
+                <div id="confirmPasswordField">
+                    <input asp-for="ConfirmPassword" type="password" placeholder="Confirm password" />
+                    <span asp-validation-for="ConfirmPassword" class="error"></span>
+                </div>
+                <div id="streetNameField">
+                    <input asp-for="StreetName" type="text" placeholder="Enter street name" />
+                    <span asp-validation-for="StreetName" class="error"></span>
+                </div>
+                <div id="postalCodeField">
+                    <input asp-for="PostalCode" type="text" placeholder="Enter postal code" />
+                    <span asp-validation-for="PostalCode" class="error"></span>
+                </div>
+                <div id="cityField">
+                    <input asp-for="City" type="text" placeholder="Enter city" />
+                    <span asp-validation-for="City" class="error"></span>
+                </div>
+                <div id="countryField">
+                    <input asp-for="Country" type="text" placeholder="Enter country" />
+                    <span asp-validation-for="Country" class="error"></span>
+                </div>
+                <div class="contentBtns">
+                    <button type="submit" class="learnBtn">Register</button>
+                </div>
+                <p class="mt-4 error">@Model.ErrorMessage</p>
+
+            </form>
+        </div>
+        <div id="homeBtn">
+            <a asp-controller="Home" asp-action="Index"><Button>V</Button></a>
+        </div>
+        
+    </div>
+</div>
+
+@section Scripts {
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+}

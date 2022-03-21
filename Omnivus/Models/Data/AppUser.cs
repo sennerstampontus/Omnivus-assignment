@@ -12,5 +12,6 @@ namespace Omnivus.Models.Data
         [Required]
         [PersonalData]
         public string LastName { get; set; }
+
     }
 }

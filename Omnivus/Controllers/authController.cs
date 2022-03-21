@@ -23,6 +23,7 @@ namespace Omnivus.Controllers
         }
 
         #region SignUp
+
         public IActionResult SignUp(string returnUrl = null)
         {
             if (_signInManager.IsSignedIn(User))
@@ -91,6 +92,7 @@ namespace Omnivus.Controllers
         #endregion
 
         #region SignIn
+
         public IActionResult SignIn(string returnUrl = null)
         {
             if(_signInManager.IsSignedIn(User))
