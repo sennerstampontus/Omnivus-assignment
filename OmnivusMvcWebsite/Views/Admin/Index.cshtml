@@ -1,0 +1,28 @@
+﻿@model AdminViewModel
+
+@{
+    ViewData["Title"] = "Admin Control";
+    Layout = "~/Views/Shared/_profileLayout.cshtml";
+}
+
+
+
+<div class="profileBackground">
+    <div id="homeBtn">
+        <button>V</button>
+    </div>
+    <div class="adminSite">
+        <div class="siteStyle">
+            <div class="d-flex adminControl">
+                <h1>Admin Control - @Model.UserProfile.FirstName @Model.UserProfile.LastName</h1>
+            </div>
+            <ul class="container">
+                @foreach(var profile in @Model.UserProfiles)
+                {
+                    <li class="listStyle"><img src="@("~/img/"+profile.FileName)" asp-append-version="true"
+                     alt="placehodler.svg" />@profile.FirstName @profile.LastName</li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>

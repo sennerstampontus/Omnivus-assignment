@@ -1,17 +1,27 @@
 ﻿@model UserProfile
 @{
     ViewData["Title"] = $"Profile - {@Model.FirstName} {@Model.LastName}";
+    Layout = "~/Views/Shared/_profileLayout.cshtml";
 }
 
 <div class="profileBackground">
     <div id="homeBtn">
-        <button>V</button>
+        <a asp-controller="Home" asp-action="Index"><button>V</button></a>
     </div>
     <div id="profile" class="container">
         <div class="profileCard cardGrid">
             <div class="profilePlaceholder container">
-                <img src="/img/profile_placeholder.svg"
+                @if(@Model.FileName != null)
+                {
+                    <img src="@("~/img/"+@Model.FileName)" asp-append-version="true"
                      alt="placehodler.svg" />
+                }
+                else
+                {
+                    <img src="/img/profile_placeholder.svg"
+                     alt="placehodler.svg" />
+                }
+                
             </div>
             <div class="profileName">
                 <span>@Model.FirstName @Model.LastName</span>
@@ -46,9 +56,10 @@
                 <div class="bio container">
                     <textarea placeholder="Write about yourself"
                               class="questionField"
-                              disabled>
+                              disabled>@Model.Bio
 </textarea>
                 </div>
+                <div class="contentBtns"><a asp-controller="Profile" asp-action="Edit" asp-route-id="@User.FindFirst("UserId").Value"><button class="learnBtn">Edit profile</button></a></div>
             </div>
         </div>
     </div>

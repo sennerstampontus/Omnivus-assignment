@@ -49,12 +49,12 @@ namespace OmnivusMvcWebsite.Controllers
             {
                 if (!await _roleManager.Roles.AnyAsync())
                 {
-                    await _roleManager.CreateAsync(new IdentityRole("admin"));
-                    await _roleManager.CreateAsync(new IdentityRole("user"));
+                    await _roleManager.CreateAsync(new IdentityRole("Admin"));
+                    await _roleManager.CreateAsync(new IdentityRole("User"));
                 }
 
                 if (!await _userManager.Users.AnyAsync())
-                    formModel.RoleName = "admin";
+                    formModel.RoleName = "Admin";
 
                 var user = await _userManager.Users.FirstOrDefaultAsync(x => x.Email == formModel.Email);
                 if (user == null)

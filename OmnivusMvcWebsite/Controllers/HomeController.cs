@@ -18,6 +18,12 @@ namespace OmnivusMvcWebsite.Controllers
             return View();
         }
 
+        [Route("/denied")]
+        public IActionResult Denied()
+        {
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();

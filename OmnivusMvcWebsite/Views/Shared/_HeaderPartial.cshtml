@@ -17,7 +17,18 @@
                     <span>Welcome <a asp-controller="Profile" asp-action="Index" asp-route-id="@User.FindFirst("UserId").Value">@await ProfileManager.DisplayNameAsync(User.FindFirst("UserId").Value)</a></span>
                 </div>
                 <div class="socials">
-                    <a asp-controller="auth" asp-action="SignOut">Sign Out</a>
+                    @if(User.IsInRole("Admin"))
+                    {
+                        <div class="d-flex">
+                            <a asp-controller="Admin" asp-action="Index" asp-route-id="@User.FindFirst("UserId").Value">Admin control</a>
+                            <a asp-controller="auth" asp-action="SignOut">Sign Out</a>
+                        </div>
+                    }
+                    else
+                    {
+                        <a asp-controller="auth" asp-action="SignOut">Sign Out</a>
+                    }
+                    
                 </div>
             }
             else

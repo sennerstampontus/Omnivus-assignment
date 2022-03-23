@@ -10,6 +10,7 @@ namespace OmnivusMvcWebsite.Services
     {
         Task<ProfileResult> CreateAsync(IdentityUser user, UserProfile profile);
         Task<UserProfile> ReadAsync(string userId);
+        Task<AdminViewModel> ReadAllAsync(string userId);
         Task<string> ReadRoleAsync(string userId);
         Task<string> DisplayNameAsync(string userId);
     }
@@ -34,6 +35,7 @@ namespace OmnivusMvcWebsite.Services
                 {
                     FirstName = profile.FirstName,
                     LastName = profile.LastName,
+                    Email = profile.Email,
                     StreetName = profile.StreetName,
                     PostalCode = profile.PostalCode,
                     City = profile.City,
@@ -64,13 +66,56 @@ namespace OmnivusMvcWebsite.Services
             {
                 profile.FirstName = profileEntity.FirstName;
                 profile.LastName = profileEntity.LastName;
-                profile.Email = profileEntity.User.Email;
+                profile.Email = profileEntity.Email;
                 profile.StreetName = profileEntity.StreetName;
                 profile.PostalCode = profileEntity.PostalCode;
                 profile.City = profileEntity.City;
                 profile.Country = profileEntity.Country;
+                profile.Bio = profileEntity.Bio;
+                profile.FileName = profileEntity.FileName;
             }
             return profile;
+        }
+
+        public async Task<AdminViewModel> ReadAllAsync(string userId)
+        {
+            var profiles = new List<UserProfile>();
+            var profile = new UserProfile();
+            var adminProfile = new AdminViewModel();
+
+            var profilesEntity = await _context.Profiles.Include(x => x.User).ToListAsync();
+            var profileEntity = await _context.Profiles.Include(x => x.User).FirstOrDefaultAsync(x => x.UserId == userId);
+
+            if (profilesEntity != null)
+            {
+                foreach (var _profile in profilesEntity)
+                {
+                    profiles.Add(new UserProfile()
+                    {
+                        FirstName = _profile.FirstName,
+                        LastName = _profile.LastName,
+                        Email = _profile.Email,
+                        StreetName = _profile.StreetName,
+                        PostalCode = _profile.PostalCode,
+                        City = _profile.City,
+                        Country = _profile.Country,
+                        Bio = _profile.Bio,
+                        FileName = _profile.FileName
+                });
+                }
+            }
+
+            if(profileEntity != null)
+            {
+                profile.FirstName = profileEntity.FirstName;
+                profile.LastName = profileEntity.LastName;
+            }
+
+            adminProfile.UserProfile = profile;
+            adminProfile.UserProfiles = profiles;
+            
+
+            return adminProfile;
         }
 
         public async Task<string> ReadRoleAsync(string userId)

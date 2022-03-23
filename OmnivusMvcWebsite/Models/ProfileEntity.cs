@@ -43,6 +43,12 @@ namespace OmnivusMvcWebsite.Models
         [Column(TypeName = "nvarchar(50)")]
         public string Country { get; set; } = "Sweden";
 
+        public string? FileName { get; set; }
+
+        [NotMapped]
+        [Display(Name = "Upload File")]
+        public IFormFile File { get; set; }
+
         public string UserId { get; set; } = string.Empty;
         public virtual IdentityUser User { get; set; }
 

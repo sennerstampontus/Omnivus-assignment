@@ -21,19 +21,20 @@
                     <div id="passwordField">
                         <input asp-for="Password" type="password" placeholder="Enter your password">
                         <span asp-validation-for="Password" class="error"></span>
-                        
+
                     </div>
                     <div class="contentBtns">
                         <button type="submit" class="learnBtn">Log In</button>
                     </div>
+
+
                     <p id="errorText" class="error">@Model.ErrorMessage</p>
-                    
                 </form>
+                <div id="homeBtn">
+                    <a asp-controller="Home" asp-action="Index"><Button>V</Button></a>
+                </div>
             </div>
+
         </div>
-        <div id="homeBtn">
-            <a asp-controller="Home" asp-action="Index"><Button>V</Button></a>
-        </div>
-        
     </div>
 </div>

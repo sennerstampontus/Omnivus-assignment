@@ -2,7 +2,10 @@
 {
     public class UserProfile
     {
+        public UserProfile()
+        {
 
+        }
 
         public string FirstName { get; set; } = string.Empty;
 
@@ -19,5 +22,9 @@
         public string City { get; set; } = string.Empty;
 
         public string Country { get; set; } = "Sweden";
+
+        public string FileName { get; set; }
+        public string FriendlyFileName { get; set; }
+        public IFormFile File { get; set; }
     }
 }
