@@ -3815,8 +3815,8 @@ html, body {
         }
 
             .adminSite .siteStyle .adminControl h1 {
-                font-family: "Karla", sans-serif;
-                color: #E1E1E1;
+                font-family: 'Karla', sans-serif;
+                color: #e1e1e1;
             }
 
         .adminSite .siteStyle ul {
@@ -3828,15 +3828,62 @@ html, body {
         }
 
             .adminSite .siteStyle ul .listStyle {
-                border: 1px solid #E1E1E1;
+                display: -ms-grid;
+                display: grid;
+                -ms-grid-columns: 1fr 1fr 1fr 0.5fr 1fr 1fr 0.5fr 1fr;
+                grid-template-columns: 1fr 1fr 1fr 0.5fr 1fr 1fr 0.5fr 1fr;
+                -webkit-column-gap: 1.5rem;
+                column-gap: 1.5rem;
+                -webkit-box-align: center;
+                -ms-flex-align: center;
+                align-items: center;
+                border: 1px solid #e1e1e1;
                 border-radius: 5px;
                 padding: 0.5rem 0;
-                font-family: "Roboto", sans-serif;
+                font-family: 'Roboto', sans-serif;
             }
+
+                .adminSite .siteStyle ul .listStyle p {
+                    margin-top: 1rem;
+                    text-align: start;
+                    color: #e1e1e1;
+                }
+                .adminSite .siteStyle ul .listStyle span {
+                    -ms-grid-column: 2;
+                    grid-column: 2;
+                    -ms-grid-row: 2;
+                    grid-row: 2;
+                    text-align: start;
+                }
+
+                .adminSite .siteStyle ul .listStyle a {
+                    text-decoration: none;
+                    font-size: 1rem;
+                    color: #e1e1e1;
+                }
+
+                    .adminSite .siteStyle ul .listStyle a:hover {
+                        cursor: pointer;
+                        color: #006DE8;
+                    }
+
+                .adminSite .siteStyle ul .listStyle .profilePlaceholder {
+                    margin: 0;
+                    padding: 0;
+                    position: unset;
+                    width: 80px;
+                    height: 80px;
+                    margin-left: 1rem;
+                }
+
+                    .adminSite .siteStyle ul .listStyle .profilePlaceholder img {
+                        width: 80px;
+                    }
 
                 .adminSite .siteStyle ul .listStyle:hover {
                     background-color: #708baa;
                 }
+
 
 .background {
     width: 100%;

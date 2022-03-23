@@ -1,4 +1,4 @@
-﻿@model UserProfile
+﻿@model ProfileViewModel
 
 @{
     ViewData["Title"] = $"Edit profile";
@@ -6,67 +6,74 @@
 }
 <div class="profileBackground">
     <div id="homeBtn">
-        <a asp-controller="Profile" asp-action="Index" asp-route-id="@User.FindFirst("UserId").Value"><button>V</button></a>
+        <a asp-controller="Profile" asp-action="Index" asp-route-id="@Model.UserEntity.UserId"><button>V</button></a>
     </div>
     <form asp-action="Edit" id="editProfile" class="container" enctype="multipart/form-data">
         <div class="profileCard cardGrid">
             <div class="profilePlaceholder container">
-                <label asp-for="File"><img src="@("~/img/"+@Model.FileName)" asp-append-version="true"
+                <label asp-for="UserProfile.File"><img src="@("~/img/"+@Model.UserProfile.FileName)" asp-append-version="true"
                      alt="placehodler.svg" /></label>
-                <input asp-for="File" style="display: none;"/>
+                <input asp-for="UserProfile.File" style="display: none;"/>
             </div>
             <div class="profileName">
                 <div id="firstnameField">
-                    <input asp-for="FirstName" type="text"
-                           placeholder="@Model.FirstName" />
+                    <input asp-for="UserProfile.FirstName" type="text"
+                           placeholder="@Model.UserProfile.FirstName" />
                     <span class="error"></span>
                 </div>
                 <div id="lastnameField">
-                    <input asp-for="LastName" type="text"
-                           placeholder="@Model.LastName" />
+                    <input asp-for="UserProfile.LastName" type="text"
+                           placeholder="@Model.UserProfile.LastName" />
                     <span class="error"></span>
                 </div>
             </div>
             <div class="profileRole">
-                <span>Admin</span>
+                @if(User.IsInRole("Admin"))
+                {
+                    <div id="postalCodeField">
+                    <input asp-for="UserEntity.RoleName" type="text"
+                           placeholder="@await ProfileManager.ReadRoleAsync(@Model.UserEntity.UserId)" />
+                </div>
+                }
+                <span>@await ProfileManager.ReadRoleAsync(@Model.UserEntity.UserId)</span>
             </div>
             <div class="profileStreetName">
                 <span>Street Name</span>
                 <div id="streetNameField">
-                    <input asp-for="StreetName" type="text"
-                           placeholder="@Model.StreetName" />
+                    <input asp-for="UserProfile.StreetName" type="text"
+                           placeholder="@Model.UserProfile.StreetName" />
                     <span class="error"></span>
                 </div>
             </div>
             <div class="profilePostalCode">
                 <span>Postal Code</span>
                 <div id="postalCodeField">
-                    <input asp-for="PostalCode" type="text"
-                           placeholder="@Model.PostalCode" />
+                    <input asp-for="UserProfile.PostalCode" type="text"
+                           placeholder="@Model.UserProfile.PostalCode" />
                     <span class="error"></span>
                 </div>
             </div>
             <div class="profileCity">
                 <span>City</span>
                 <div id="cityField">
-                    <input asp-for="City" type="text"
-                           placeholder="@Model.City" />
+                    <input asp-for="UserProfile.City" type="text"
+                           placeholder="@Model.UserProfile.City" />
                     <span class="error"></span>
                 </div>
             </div>
             <div class="profileCountry">
                 <span>Country</span>
                 <div id="countryField">
-                    <input asp-for="Country" type="text"
-                           placeholder="@Model.Country" />
+                    <input asp-for="UserProfile.Country" type="text"
+                           placeholder="@Model.UserProfile.Country" />
                     <span class="error"></span>
                 </div>
             </div>
             <div class="profileEmail">
                 <span>Emailaddress</span>
                 <div id="emailField">
-                    <input asp-for="Email" type="email"
-                           placeholder="@Model.Email" />
+                    <input asp-for="UserProfile.Email" type="email"
+                           placeholder="@Model.UserProfile.Email" />
                     <p class="emailDisplay">Note that this is only your display email.<br />To change account email, go to Account Settings.</p>
                 </div>
             </div>
@@ -75,7 +82,7 @@
             <div class="cardGrid container">
                 <h1>About me</h1>
                 <div class="bio container">
-                    <textarea asp-for="Bio" placeholder="Write about yourself"
+                    <textarea asp-for="UserProfile.Bio" placeholder="Write about yourself"
                               class="questionField"></textarea>
                 </div>
                 <div class="contentBtns"><button type="submit" class="learnBtn">Save</button></div>

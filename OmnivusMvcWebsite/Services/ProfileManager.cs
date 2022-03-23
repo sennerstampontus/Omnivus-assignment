@@ -9,7 +9,7 @@ namespace OmnivusMvcWebsite.Services
     public interface IProfileManager
     {
         Task<ProfileResult> CreateAsync(IdentityUser user, UserProfile profile);
-        Task<UserProfile> ReadAsync(string userId);
+        Task<ProfileViewModel> ReadAsync(string userId);
         Task<AdminViewModel> ReadAllAsync(string userId);
         Task<string> ReadRoleAsync(string userId);
         Task<string> DisplayNameAsync(string userId);
@@ -55,13 +55,19 @@ namespace OmnivusMvcWebsite.Services
         public async Task<string> DisplayNameAsync(string userId)
         {
             var res = await ReadAsync(userId);
-            return $"{res.FirstName} {res.LastName}";
+            return $"{res.UserProfile.FirstName} {res.UserProfile.LastName}";
         }
 
-        public async Task<UserProfile> ReadAsync(string userId)
+        public async Task<ProfileViewModel> ReadAsync(string userId)
         {
             var profile = new UserProfile();
             var profileEntity = await _context.Profiles.Include(x => x.User).FirstOrDefaultAsync(x => x.UserId == userId);
+
+            var user = new UserEntityModel();
+            var userEntity = profileEntity.User;
+
+            var role = await ReadRoleAsync(userEntity.Id);
+
             if(profileEntity != null)
             {
                 profile.FirstName = profileEntity.FirstName;
@@ -73,8 +79,20 @@ namespace OmnivusMvcWebsite.Services
                 profile.Country = profileEntity.Country;
                 profile.Bio = profileEntity.Bio;
                 profile.FileName = profileEntity.FileName;
+
+                user.UserId = userEntity.Id;
+                user.UserName = userEntity.UserName;
+                user.RoleName = role;
+                
             }
-            return profile;
+
+            var profileView = new ProfileViewModel
+            {
+                UserProfile = profile,
+                UserEntity = user
+            };
+
+            return profileView;
         }
 
         public async Task<AdminViewModel> ReadAllAsync(string userId)
@@ -92,6 +110,7 @@ namespace OmnivusMvcWebsite.Services
                 {
                     profiles.Add(new UserProfile()
                     {
+                        UserId = _profile.UserId,
                         FirstName = _profile.FirstName,
                         LastName = _profile.LastName,
                         Email = _profile.Email,
@@ -101,6 +120,7 @@ namespace OmnivusMvcWebsite.Services
                         Country = _profile.Country,
                         Bio = _profile.Bio,
                         FileName = _profile.FileName
+                        
                 });
                 }
             }

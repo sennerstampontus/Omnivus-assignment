@@ -1,6 +1,6 @@
-﻿@model UserProfile
+﻿@model ProfileViewModel
 @{
-    ViewData["Title"] = $"Profile - {@Model.FirstName} {@Model.LastName}";
+    ViewData["Title"] = $"Profile - {@Model.UserProfile.FirstName} {@Model.UserProfile.LastName}";
     Layout = "~/Views/Shared/_profileLayout.cshtml";
 }
 
@@ -11,9 +11,9 @@
     <div id="profile" class="container">
         <div class="profileCard cardGrid">
             <div class="profilePlaceholder container">
-                @if(@Model.FileName != null)
+                @if(@Model.UserProfile.FileName != null)
                 {
-                    <img src="@("~/img/"+@Model.FileName)" asp-append-version="true"
+                    <img src="@("~/img/"+@Model.UserProfile.FileName)" asp-append-version="true"
                      alt="placehodler.svg" />
                 }
                 else
@@ -24,30 +24,30 @@
                 
             </div>
             <div class="profileName">
-                <span>@Model.FirstName @Model.LastName</span>
+                <span>@Model.UserProfile.FirstName @Model.UserProfile.LastName</span>
             </div>
             <div class="profileRole">
-                <span> @await ProfileManager.ReadRoleAsync(User.FindFirst("UserId").Value)</span>
+                <span>@await ProfileManager.ReadRoleAsync(@Model.UserEntity.UserId)</span>
             </div>
             <div class="profileStreetName">
                 <span>Street Name</span>
-                <p class="mt-3">@Model.StreetName</p>
+                <p class="mt-3">@Model.UserProfile.StreetName</p>
             </div>
             <div class="profilePostalCode">
                 <span>Postal Code</span>
-                <p class="mt-3">@Model.PostalCode</p>
+                <p class="mt-3">@Model.UserProfile.PostalCode</p>
             </div>
             <div class="profileCity">
                 <span>City</span>
-                <p class="mt-3">@Model.City</p>
+                <p class="mt-3">@Model.UserProfile.City</p>
             </div>
             <div class="profileCountry">
                 <span>Country</span>
-                <p class="mt-3">@Model.Country</p>
+                <p class="mt-3">@Model.UserProfile.Country</p>
             </div>
             <div class="profileEmail">
                 <span>Emailaddress</span>
-                <p class="mt-3">@Model.Email</p>
+                <p class="mt-3">@Model.UserProfile.Email</p>
             </div>
         </div>
         <div class="profileInfo">
@@ -56,10 +56,10 @@
                 <div class="bio container">
                     <textarea placeholder="Write about yourself"
                               class="questionField"
-                              disabled>@Model.Bio
+                              disabled>@Model.UserProfile.Bio
 </textarea>
                 </div>
-                <div class="contentBtns"><a asp-controller="Profile" asp-action="Edit" asp-route-id="@User.FindFirst("UserId").Value"><button class="learnBtn">Edit profile</button></a></div>
+                <div class="contentBtns"><a asp-controller="Profile" asp-action="Edit" asp-route-id="@Model.UserEntity.UserId"><button class="learnBtn">Edit profile</button></a></div>
             </div>
         </div>
     </div>

@@ -9,7 +9,7 @@
 
 <div class="profileBackground">
     <div id="homeBtn">
-        <button>V</button>
+        <a asp-controller="Home" asp-action="Index"><button>V</button></a>
     </div>
     <div class="adminSite">
         <div class="siteStyle">
@@ -17,10 +17,30 @@
                 <h1>Admin Control - @Model.UserProfile.FirstName @Model.UserProfile.LastName</h1>
             </div>
             <ul class="container">
-                @foreach(var profile in @Model.UserProfiles)
+                @foreach (var profile in @Model.UserProfiles)
                 {
-                    <li class="listStyle"><img src="@("~/img/"+profile.FileName)" asp-append-version="true"
-                     alt="placehodler.svg" />@profile.FirstName @profile.LastName</li>
+                    <li class="listStyle">
+                        <div class="profilePlaceholder container">
+                            @if (profile.FileName != null)
+                            {
+                                <img src="@("~/img/"+profile.FileName)" asp-append-version="true"
+                             alt="placehodler.svg" />
+                            }
+                            else
+                            {
+                                <img src="/img/profile_placeholder.svg" asp-append-version="true"
+                             alt="placehodler.svg" />
+                            }
+
+                        </div>
+                        <p>@profile.FirstName <br /> @profile.LastName</p>
+                        <p>@profile.StreetName</p>
+                        <p>@profile.PostalCode</p>
+                        <p>@profile.City</p>
+                        <p>@profile.Country</p>
+                        <p>@await ProfileManager.ReadRoleAsync(profile.UserId)</p>
+                        <p class="pe-3"><a asp-controller="Profile" asp-action="Index" asp-route-id="@profile.UserId">View</a> | <a asp-controller="Profile" asp-action="Edit" asp-route-id="@profile.UserId">Edit</a> | Delete</p>
+                    </li>
                 }
             </ul>
         </div>
