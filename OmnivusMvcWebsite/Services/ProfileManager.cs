@@ -119,8 +119,7 @@ namespace OmnivusMvcWebsite.Services
                         City = _profile.City,
                         Country = _profile.Country,
                         Bio = _profile.Bio,
-                        FileName = _profile.FileName
-                        
+                        FileName = _profile.FileName 
                 });
                 }
             }

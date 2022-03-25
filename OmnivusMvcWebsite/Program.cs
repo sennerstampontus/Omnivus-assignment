@@ -17,6 +17,7 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(x => {
 
 builder.Services.AddScoped<IUserClaimsPrincipalFactory<IdentityUser>, UserClaims>();
 builder.Services.AddScoped<IProfileManager, ProfileManager>();
+builder.Services.AddScoped<IRolesManager, RolesManager>();
 builder.Services.ConfigureApplicationCookie(x =>
 {
     x.LoginPath = "/SignIn";

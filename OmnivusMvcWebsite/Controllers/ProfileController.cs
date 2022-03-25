@@ -33,8 +33,14 @@ namespace OmnivusMvcWebsite.Controllers
 
         public async Task<IActionResult> Index(string id)
         {
-            var profile = await _profileManager.ReadAsync(id);
-            return View(profile);
+            if (await _context.Users.FindAsync(id) != null)
+            {
+                var profile = await _profileManager.ReadAsync(id);
+                return View(profile);
+            }
+            
+            
+           return RedirectToAction("Index", "NotFound");
         }
 
         [HttpGet("edit/{id}")]

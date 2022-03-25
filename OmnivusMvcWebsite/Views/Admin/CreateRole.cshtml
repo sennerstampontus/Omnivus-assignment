@@ -1,0 +1,55 @@
+﻿@model AdminCreateRoleViewModel
+
+@{
+    ViewData["Title"] = "Admin Control - Roles";
+    Layout = "~/Views/Shared/_profileLayout.cshtml";
+}
+
+
+
+<div class="profileBackground">
+    <div id="homeBtn">
+        <a asp-controller="Admin" asp-action="Index" asp-route-id="@User.FindFirst("UserId").Value"><button>V</button></a>
+    </div>
+    <div class="adminControlTitle container">
+        <h1>Roles</h1>
+    </div>
+    <div class="adminSite">
+        <div class="siteStyle">
+            <div class="d-flex adminControl">
+                <h2>Admin Control - @Model.AdminRoles.UserProfile.FirstName @Model.AdminRoles.UserProfile.LastName</h2>
+                <a asp-action="Roles" asp-route-id="@User.FindFirst("UserId").Value"><p>Cancel</p></a>
+            </div>
+            <ul class="container">
+                @foreach (var role in @Model.AdminRoles.RoleNames)
+                {
+                    @if (role == "Admin")
+                    {
+                        <li class="roleListStyle">
+                            <p>@role</p>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="roleListStyle">
+                            <p id="roleSection">@role</p>
+                            <p>Edit| Delete</p>
+                        </li>
+                    }
+                    
+
+                }
+                <li class="newRoleSection">
+                    <form asp-action="CreateRole" asp-route-id="@User.FindFirst("UserId").Value" class="newRoleInput">
+                        <div class="newRoleInput">
+                            <input asp-for="NewRoleName" type="text" placeholder="Enter new role">
+                        </div>
+                        <div class="contentBtns">
+                            <button type="submit" class="learnBtn">Add</button>
+                        </div>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

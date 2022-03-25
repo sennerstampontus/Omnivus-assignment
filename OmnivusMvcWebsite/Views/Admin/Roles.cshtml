@@ -1,0 +1,91 @@
+﻿@model AdminCreateRoleViewModel
+
+@{
+    ViewData["Title"] = "Admin Control - Roles";
+    Layout = "~/Views/Shared/_profileLayout.cshtml";
+    var _user = @User.FindFirst("UserId").Value;
+    
+}
+
+
+
+
+<div class="profileBackground">
+    <div id="homeBtn">
+        <a asp-controller="Admin" asp-action="Index" asp-route-id="@_user"><button>V</button></a>
+    </div>
+    <div class="adminControlTitle container">
+        <h1>Roles</h1>
+    </div>
+    <div class="adminSite">
+        <div class="siteStyle">
+            <div class="d-flex adminControl">
+                <h2>Admin Control - @Model.AdminRoles.UserProfile.FirstName @Model.AdminRoles.UserProfile.LastName</h2>
+                <a asp-action="Index" asp-route-id="@User.FindFirst("UserId").Value"><p>Back</p></a>
+            </div>
+            <ul class="container">
+                @foreach (var role in @Model.AdminRoles.RoleNames)
+                {
+                    @if (role == "Admin" || role == "User")
+                    {
+                        <li class="roleListStyle">
+                            <p>@role</p> 
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="roleListStyle">
+                            <p style="display: block;" id="roleSection">@role</p>
+                            <div class="roleFormStyle" style="display: none;"><form asp-action="UpdateRole" asp-route-id="@User.FindFirst("UserId").Value"><p><input asp-for="NewRoleName" type='text' placeholder='Enter new role name'/></p>
+                            <p id="oldRole" style="display: none;"><input asp-for="OldRoleName" type='text' value="@role"/></p>
+                            <div class='editRoles'><button type="submit" class='editRolesBtn'>Save</button></div></form></div>
+                            <span><a onclick="handleClick(event)">Edit</a> | <form asp-action="DeleteRole" asp-route-id="@User.FindFirst("UserId").Value"><p style="display: none;"><input asp-for="OldRoleName" type='text' value="@role"/></p><button id="roleDelete">Delete</button></form></span>                          
+                        </li>
+                    }
+                }
+                
+                <li class="newRoleSection">
+                    <a asp-action="CreateRole" asp-route-id="@User.FindFirst("UserId").Value"><div class="newRoleTitle">
+                        New
+                        <i class="fa-solid fa-square-plus"></i>
+                    </div></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+    <script type="text/javascript">
+        const save = document.getElementById("saveBtn");
+        const edit = document.getElementById("roleEdit");
+        const setOldRole = document.getElementById("oldRole");
+
+        let handleClick = (e) => {
+            e.preventDefault();
+            const p = e.path[2].children[0];
+            const input = e.path[2].children[1];
+
+            switch(p.style.display){
+                case "block":
+                p.style.display = "none";
+                break;
+                
+                case "none":
+                p.style.display = "block";
+                break;
+            }
+            switch(input.style.display){
+                case "flex":
+                input.style.display = "none";
+                break;
+                
+                case "none":
+                input.style.display = "flex";
+                break;
+            }   
+        } 
+
+    </script>
+}

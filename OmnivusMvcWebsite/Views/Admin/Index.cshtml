@@ -11,10 +11,15 @@
     <div id="homeBtn">
         <a asp-controller="Home" asp-action="Index"><button>V</button></a>
     </div>
+    <div class="adminControlTitle container">
+        <h1>Users</h1>
+    </div>
     <div class="adminSite">
         <div class="siteStyle">
+
             <div class="d-flex adminControl">
-                <h1>Admin Control - @Model.UserProfile.FirstName @Model.UserProfile.LastName</h1>
+                <h2>Admin Control - @Model.UserProfile.FirstName @Model.UserProfile.LastName</h2>
+                <a asp-action="Roles" asp-route-id="@User.FindFirst("UserId").Value"><p>Edit roles</p></a>
             </div>
             <ul class="container">
                 @foreach (var profile in @Model.UserProfiles)
