@@ -55,7 +55,7 @@ namespace OmnivusMvcWebsite.Models
         public string ErrorMessage { get; set; } = "";
         public string ReturnUrl { get; set; } = "/";
 
-        public string RoleName { get; set; } = "user";
+        public string RoleName { get; set; } = "User";
 
     }
 }

@@ -38,9 +38,9 @@ namespace OmnivusMvcWebsite.Controllers
                 var profile = await _profileManager.ReadAsync(id);
                 return View(profile);
             }
-            
-            
-           return RedirectToAction("Index", "NotFound");
+
+
+            return RedirectToAction("Index", "NotFound");
         }
 
         [HttpGet("edit/{id}")]
@@ -58,39 +58,42 @@ namespace OmnivusMvcWebsite.Controllers
                 var profileEntity = await _context.Profiles.FirstOrDefaultAsync(x => x.UserId == id);
                 var userEntity = await _userManager.Users.FirstOrDefaultAsync(x => x.Id == profileEntity.UserId);
                 var userRoles = await _userManager.GetRolesAsync(userEntity);
-                
+                var identityUser = await _context.Users.FindAsync(User.FindFirst("UserId").Value);
 
-
-                if(await _roleManager.FindByNameAsync(model.UserEntity.RoleName) != null)
+                if (await _userManager.IsInRoleAsync(identityUser, "Admin"))
                 {
-                    if (!await _userManager.IsInRoleAsync(userEntity, model.UserEntity.RoleName))
+                    if (await _roleManager.FindByNameAsync(model.UserEntity.RoleName) != null)
                     {
-                        await _userManager.AddToRoleAsync(userEntity, model.UserEntity.RoleName);
-                        foreach(var role in userRoles)
+                        if (!await _userManager.IsInRoleAsync(userEntity, model.UserEntity.RoleName))
                         {
-                            if(role != model.UserEntity.RoleName)
+                            await _userManager.AddToRoleAsync(userEntity, model.UserEntity.RoleName);
+                            foreach (var role in userRoles)
                             {
-                                await _userManager.RemoveFromRoleAsync(userEntity, role);
+                                if (role != model.UserEntity.RoleName)
+                                {
+                                    await _userManager.RemoveFromRoleAsync(userEntity, role);
+                                }
                             }
+                            _context.Entry(userEntity).State = EntityState.Modified;
+                            await _context.SaveChangesAsync();
                         }
+                    }
+
+                    else
+                    {
+                        foreach (var role in userRoles)
+                        {
+                            await _userManager.RemoveFromRoleAsync(userEntity, role);
+                        }
+                        await _roleManager.CreateAsync(new IdentityRole(model.UserEntity.RoleName));
+                        await _userManager.AddToRoleAsync(userEntity, model.UserEntity.RoleName);
+
                         _context.Entry(userEntity).State = EntityState.Modified;
                         await _context.SaveChangesAsync();
                     }
                 }
 
-                else
-                {
-                    foreach (var role in userRoles)
-                    {
-                        await _userManager.RemoveFromRoleAsync(userEntity, role);
-                    }
-                    await _roleManager.CreateAsync(new IdentityRole(model.UserEntity.RoleName));
-                    await _userManager.AddToRoleAsync(userEntity, model.UserEntity.RoleName);
 
-                    _context.Entry(userEntity).State = EntityState.Modified;
-                    await _context.SaveChangesAsync();
-                }
-                
 
                 if (model.UserProfile.File != null)
                 {
@@ -109,7 +112,7 @@ namespace OmnivusMvcWebsite.Controllers
                     {
                         profileEntity.FirstName = model.UserProfile.FirstName;
                         profileEntity.LastName = model.UserProfile.LastName;
-                        
+
                         profileEntity.Email = model.UserProfile.Email;
                         profileEntity.StreetName = model.UserProfile.StreetName;
                         profileEntity.PostalCode = model.UserProfile.PostalCode;
@@ -155,7 +158,7 @@ namespace OmnivusMvcWebsite.Controllers
 
             catch { return View(model); }
 
-        
+
         }
     }
 }

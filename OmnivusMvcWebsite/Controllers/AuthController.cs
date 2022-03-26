@@ -74,6 +74,7 @@ namespace OmnivusMvcWebsite.Controllers
 
                         var profile = new UserProfile
                         {
+                            UserId = user.Id,
                             FirstName = formModel.FirstName,
                             LastName = formModel.LastName,
                             Email = formModel.Email,

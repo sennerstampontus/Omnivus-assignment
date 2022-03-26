@@ -80,9 +80,12 @@ namespace OmnivusMvcWebsite.Controllers
         {
             if (oldRoleName != null)
             {
+                var usersInRole = await _userManager.GetUsersInRoleAsync(oldRoleName);
+                foreach(var user in usersInRole)
+                {
+                    await _userManager.AddToRoleAsync(user, "User");
+                }
                 var identityRole = await _identityRoleManager.FindByNameAsync(oldRoleName);
-                
-
                 await _identityRoleManager.DeleteAsync(identityRole);
 
                 
