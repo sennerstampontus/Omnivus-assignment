@@ -75,22 +75,38 @@ namespace OmnivusMvcWebsite.Controllers
             return RedirectToAction("CreateRole", "Admin", new { Id = User.FindFirst("UserId").Value });
         }
 
-        [HttpPost("{id}/roles/DeleteRole")]
-        public async Task<IActionResult> DeleteRole(string oldRoleName)
+        [HttpGet("{id}/roles/DeleteRole/{roleName}")]
+        public async Task<IActionResult> DeleteRole(string roleName)
         {
-            if (oldRoleName != null)
+            if (roleName != null)
             {
-                var usersInRole = await _userManager.GetUsersInRoleAsync(oldRoleName);
-                foreach(var user in usersInRole)
+                var usersInRole = await _userManager.GetUsersInRoleAsync(roleName);
+                if(usersInRole != null)
                 {
-                    await _userManager.AddToRoleAsync(user, "User");
+                    foreach (var user in usersInRole)
+                    {
+                        await _userManager.AddToRoleAsync(user, "User");
+                    }
                 }
-                var identityRole = await _identityRoleManager.FindByNameAsync(oldRoleName);
+               
+                var identityRole = await _identityRoleManager.FindByNameAsync(roleName);
                 await _identityRoleManager.DeleteAsync(identityRole);
 
                 
             }
             return RedirectToAction("Roles", "Admin", new { Id = User.FindFirst("UserId").Value });
+        }
+
+        [HttpGet("{id}/DeleteUser/{userId}")]
+        public async Task<IActionResult> DeleteUser(string userId)
+        {
+            var identityUser = await _userManager.FindByIdAsync(userId);
+
+            if (identityUser != null)
+            {
+                await _userManager.DeleteAsync(identityUser);
+            }
+            return RedirectToAction("Index", "Admin", new { Id = User.FindFirst("UserId").Value });
         }
     }
 }

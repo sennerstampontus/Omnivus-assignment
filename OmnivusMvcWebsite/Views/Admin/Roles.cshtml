@@ -37,7 +37,7 @@
                             <div class="roleFormStyle" style="display: none;"><form asp-action="UpdateRole" asp-route-id="@User.FindFirst("UserId").Value"><p><input asp-for="NewRoleName" type='text' placeholder='Enter new role name'/></p>
                             <p id="oldRole" style="display: none;"><input asp-for="OldRoleName" type='text' value="@role"/></p>
                             <div class='editRoles'><button type="submit" class='editRolesBtn'>Save</button></div></form></div>
-                            <span><a onclick="handleClick(event)">Edit</a> | <form asp-action="DeleteRole" asp-route-id="@User.FindFirst("UserId").Value"><p style="display: none;"><input asp-for="OldRoleName" type='text' value="@role"/></p><button id="roleDelete">Delete</button></form></span>                          
+                            <span><a onclick="handleClick(event)">Edit</a> | @Html.ActionLink("Delete", "DeleteRole", new{Id = User.FindFirst("UserId").Value, RoleName = role})</span>                          
                         </li>
                     }
                 }

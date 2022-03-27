@@ -1,7 +1,7 @@
 ﻿@model AdminViewModel
 
 @{
-    ViewData["Title"] = "Admin Control";
+    ViewData["Title"] = $"Admin - {@Model.UserProfile.FirstName} {@Model.UserProfile.LastName}";
     Layout = "~/Views/Shared/_profileLayout.cshtml";
 }
 
@@ -44,7 +44,7 @@
                         <p>@profile.City</p>
                         <p>@profile.Country</p>
                         <p>@await ProfileManager.ReadRoleAsync(profile.UserId)</p>
-                        <p class="pe-3"><a asp-controller="Profile" asp-action="Index" asp-route-id="@profile.UserId">View</a> | <a asp-controller="Profile" asp-action="Edit" asp-route-id="@profile.UserId">Edit</a> | Delete</p>
+                        <p class="pe-3"><a asp-controller="Profile" asp-action="Index" asp-route-id="@profile.UserId">View</a> | <a asp-controller="Profile" asp-action="Edit" asp-route-id="@profile.UserId">Edit</a> | @Html.ActionLink("Delete", "DeleteUser", new{Id = User.FindFirst("UserId").Value, UserId = profile.UserId})</p>
                     </li>
                 }
             </ul>
