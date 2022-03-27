@@ -23,21 +23,9 @@
             <ul class="container">
                 @foreach (var role in @Model.AdminRoles.RoleNames)
                 {
-                    @if (role == "Admin")
-                    {
-                        <li class="roleListStyle">
-                            <p>@role</p>
-                        </li>
-                    }
-                    else
-                    {
-                        <li class="roleListStyle">
-                            <p id="roleSection">@role</p>
-                            <p>Edit| Delete</p>
-                        </li>
-                    }
-                    
-
+                    <li class="roleListStyle">
+                        <p>@role</p>
+                    </li>
                 }
                 <li class="newRoleSection">
                     <form asp-action="CreateRole" asp-route-id="@User.FindFirst("UserId").Value" class="newRoleInput">
